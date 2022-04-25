@@ -218,7 +218,7 @@ public class LinkedList {
     public void deletepos(int posplayer){
         deleteposr(first,posplayer);
     }
-    //Borrar las posiciones en donde estaban los juagdores
+    //Borrar las posiciones en donde estaban los jugadores
     public void deleteposr(Node current,int posplayer){
         
         if(current.index==posplayer){

@@ -100,20 +100,23 @@ public class Main {
         String nicknameRick = sc.next();
         System.out.println("Enter the Username for Morty:");
         String nicknameMorty = sc.next();
-        
-        //Verificar si el username ya ha jugado antes
+        scoredata.saveJSON();
+
         int posR = scoredata.searchUser(nicknameRick);
+       
         int posM = scoredata.searchUser(nicknameMorty);
+        
+        //System.out.println("rpos:"+posR);
+        //System.out.println("+mpos:"+posM);
         long prevScoreM=0;
         long prevScoreR=0;
         
+        //si pos es -1 no se enconró el usuario
         if(posM!=-1) {
-        	 prevScoreM=ScoreData.scoreBoard.get(posM).getScore();
-        	
+        	 prevScoreM=ScoreData.scoreBoard.get(posM).getScore();	 //guarda el puntaje antiguo del jugador
         }
         if(posR!=-1) {
         	 prevScoreR=ScoreData.scoreBoard.get(posR).getScore();
-       
         }
         
         Rick.setNickname(nicknameRick);
@@ -123,6 +126,7 @@ public class Main {
         Player player = new Player("","","",0);
         long totalSecondsR=0;
         long totalSecondsM=0;
+        //Inicia variables de conteo de segundos
         LocalTime timeM=LocalTime.of(00,00,00);
         LocalTime timeR=LocalTime.of(00,00,00);
         LocalTime end=LocalTime.of(00,00,00);
@@ -131,11 +135,13 @@ public class Main {
             if(count%2==0){
                 turn = Morty.getName();
                 player = Morty;
+                //Inicia a contar los segundos de Morty ya que empieza su turno
                 timeM=LocalTime.now();
                
             }else{
                 turn = Rick.getName();
                 player= Rick;
+              //Inicia a contar los segundos de Rick ya que empieza su turno
                 timeR=LocalTime.now();
             }
             
@@ -149,13 +155,13 @@ public class Main {
                 case 1:
                    throwdice(list,player,num);
                    count++;
-                   end=LocalTime.now();
+                   end=LocalTime.now();//Se termina el conteo de segundos en este turno ya que se lanzaron los dados
                    if(player==Rick) {
-                	   totalSecondsR+=timeR.until(end, ChronoUnit.SECONDS);
-                	   System.out.println("R:"+totalSecondsR);     	   
+                	   totalSecondsR+=timeR.until(end, ChronoUnit.SECONDS);//Se van sumando los segundos que gasta cada jugador en su turno
+                	   //System.out.println("R:"+totalSecondsR);     	   
                    }else {
                 	   totalSecondsM+=timeM.until(end, ChronoUnit.SECONDS);
-                	   System.out.println("M:"+totalSecondsM);
+                	   //System.out.println("M:"+totalSecondsM);
                    }
                     break;
                 case 2:
@@ -170,8 +176,10 @@ public class Main {
                     break;
             }
         }while(list.existseeds()==true);
-        long totalScoreR=(Rick.getAmountSeeds()*120)-totalSecondsR;
+        //Se calculan los puntajes de cada jugador:
+        long totalScoreR=(Rick.getAmountSeeds()*120)-totalSecondsR; 
         long totalScoreM=(Morty.getAmountSeeds()*120)-totalSecondsM;
+        //Si el puntaje da negativo (por mucho tiempo gastado y pocas semillas recolectadas) se convierte en 0.
         if(totalScoreR<0) {
         	totalScoreR=0;
         }
@@ -185,28 +193,37 @@ public class Main {
 				+ "MORTY: \n"
         		+ "Total time: "+totalSecondsM+"s"+ "Total seeds collected: "+Morty.getAmountSeeds()+ " Score on this attempt: "+totalScoreM+"\n");
         String winner="";
+        long scoreWinner=0;
+        //Se dice el ganador (Gana el de más semillas recolectadas)
         if(Rick.getAmountSeeds()>Morty.getAmountSeeds()) {
         	System.out.println("Rick has won by collecting "+Rick.getAmountSeeds() +" seeds");
         	winner=nicknameRick;
+        	scoreWinner=totalScoreR;
         }else if(Morty.getAmountSeeds()>Rick.getAmountSeeds()) {
         	System.out.println("Morty has won by collecting "+Morty.getAmountSeeds() +" seeds");
         	winner=nicknameMorty;
-        }else {
+        	scoreWinner=totalScoreM;
+        }else {//En caso de empate en numero de semillas gana el de mejor puntaje(menos tiempo)
         	if(totalScoreR>totalScoreM) {
         		System.out.println("Rick has won by collecting "+Rick.getAmountSeeds() +" seeds in a time of "+totalSecondsR+" seconds");
         		winner=nicknameRick;
+        		scoreWinner=totalScoreR;
         	}else if(totalScoreM>totalScoreR) {
         		System.out.println("Morty has won by collecting "+Morty.getAmountSeeds() +" seeds in a time of "+totalSecondsM+" seconds");
         		winner=nicknameMorty;
+        		scoreWinner=totalScoreM;
         	}else {
         		System.out.println("It was a tie!");
         	}
         }
         System.out.println("CONGRATULATIONS TO THE WINNER!");
+        //Actualiza el puntaje en caso de que sea un usuario que ya ha ganado
         if(winner==nicknameRick && posR!=-1) {
-        	scoredata.scoreBoard.get(posR).setScore(prevScoreR+totalScoreR);
+        	scoredata.scoreBoard.get(posR).setScore(prevScoreR+scoreWinner);
         }else if(winner==nicknameMorty && posM!=-1) {
-        	scoredata.scoreBoard.get(posM).setScore(prevScoreM+totalScoreM);
+        	scoredata.scoreBoard.get(posM).setScore(prevScoreM+scoreWinner);
+        }else {
+        	scoredata.scoreBoard.add(new User(winner,scoreWinner)); //Guarda en el tablero de puntajes un nuevo usuario en caso de no haber ganado antes
         }
         scoredata.saveJSON();
     }

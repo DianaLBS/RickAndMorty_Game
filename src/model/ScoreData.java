@@ -22,13 +22,7 @@ public class ScoreData{
 	public void addUsername(User user) {
 		scoreBoard.add(user);
 	}
-	
-	//public void print() {
-		//for (User u: scoreBoard) {
-			//	System.out.println(u.getUserName()+" "+u.getScore());
-		//}
-	//}
-	
+	//Serializar
 	public static void saveJSON() {
 		try {
 			Gson gson = new Gson();
@@ -45,7 +39,7 @@ public class ScoreData{
 			e.printStackTrace();
 		}
 	}
-
+	//Serializar
 	public static void loadJSON() {
 		try {
 			FileInputStream fis = new FileInputStream(new File("scoreBoard.json"));
@@ -67,6 +61,7 @@ public class ScoreData{
 		}
 	}
 	
+	//Busquedad binaria para saber si el usuario ya está en el tablero de puntajes
 	public static int searchUser(String username) {
 	    
 		int low=0;
@@ -88,27 +83,9 @@ public class ScoreData{
 	    return -1;
 	}
 	
-	/*public int searchUser(String username) {
-		int low=0;
-		int high=scoreBoard.size()-1;
-	    if (low > high) {
-	        return -1;
-	    }
-	    int midPos = (low + high) / 2;
-	    String midUser = scoreBoard.get(midPos).getUserName();
-	 
-	    int compare = username.compareTo(midUser);
-
-	    if (compare == 0) {
-	        return midPos;
-	    }
-	 
-	    if (compare < 0) {
-	        high = midPos - 1;
-	        return searchUser(username);
-	    } else {
-	        low = midPos + 1;
-	        return searchUser(username);
-	    }
-	}*/
+	public void print() {
+		for (User u: scoreBoard) {
+				System.out.println(u.getUserName());
+		}
+	}
 }
