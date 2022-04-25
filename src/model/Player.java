@@ -13,6 +13,7 @@ public class Player {
         this.nickname = nickname;
         this.idPlayer = idPlayer;
         this.amountSeeds = amountSeeds;
+ 
     }
 
     public String getName() {
@@ -46,6 +47,7 @@ public class Player {
     public void setAmountSeeds(int amountSeeds) {
         this.amountSeeds = amountSeeds;
     }
+
     
 }
 

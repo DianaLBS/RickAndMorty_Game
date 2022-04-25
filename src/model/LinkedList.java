@@ -12,6 +12,8 @@ public class LinkedList {
         last=null;
     }
     //Insertar valores
+    
+    /**/
     public void insert(String data){
         Node newNode =new Node();
         newNode.data=data;
@@ -132,7 +134,7 @@ public class LinkedList {
         flag = existSeedsr(first);
         return flag;
     }
-    //Existen semillas, saber cuando terminar el juego
+    //Existen semillas, (saber cuando terminar el juego)
     public boolean existSeedsr(Node current){
         if(current.data.equals("*")){
             return true;
@@ -232,7 +234,7 @@ public class LinkedList {
         int pos = searchplayer(first,idplayer);
         return pos;
     }
-    //Buscar la posicion donde esta el juagdor
+    //Buscar la posicion donde esta el jugador
     public int searchplayer(Node current,String idplayer){
         
         if(current.data.equals(idplayer)){
@@ -246,6 +248,7 @@ public class LinkedList {
     public void pos(){
         posr(first);
     }
+    //************************************************************************//
     //Imprimir las posiciones de cada nodo, solo es prueba
     public void posr(Node current){
         System.out.println(current.index);
