@@ -47,19 +47,30 @@ public class LinkedList {
     }
     //Display
     public void display(int num,int n){
-        displayrecursive(first,1,num,n);
+        displayrecursive(first,1,num,n,1);
     }
     //Imprimir en forma de tablero
     //n es el numero de casillas
     //a es el numero de columnas
-    public void displayrecursive(Node current,int i,int n,int a){
+    public void displayrecursive(Node current,int i,int n,int a,int m){
         if(i>n){
             return;
         }
-        System.out.printf("%10s",current.data+" ");
-        if(i%a==0){
-            System.out.println();
-        }
+        if(m%2!=0) {
+            System.out.printf("%10s",current.data+" ");
+            }else {
+                for(int j=current.index+a-1;j>=current.index;j--) {
+                    System.out.printf("%10s",j+" ");
+                    i++;
+                }
+                i=current.index+a-1;
+                current = searchNode(current,i);
+            }
+            
+            if(i%a==0){
+                System.out.println();
+                m++;
+            }
         i++;
         displayrecursive(current.next,i,n,a);
     } 
