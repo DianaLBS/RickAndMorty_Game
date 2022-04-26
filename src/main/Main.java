@@ -111,7 +111,7 @@ public class Main {
         long prevScoreM=0;
         long prevScoreR=0;
         
-        //si pos es -1 no se enconró el usuario
+        //si pos es -1 no se enconrï¿½ el usuario
         if(posM!=-1) {
         	 prevScoreM=ScoreData.scoreBoard.get(posM).getScore();	 //guarda el puntaje antiguo del jugador
         }
@@ -194,7 +194,7 @@ public class Main {
         		+ "Total time: "+totalSecondsM+"s"+ "Total seeds collected: "+Morty.getAmountSeeds()+ " Score on this attempt: "+totalScoreM+"\n");
         String winner="";
         long scoreWinner=0;
-        //Se dice el ganador (Gana el de más semillas recolectadas)
+        //Se dice el ganador (Gana el de mï¿½s semillas recolectadas)
         if(Rick.getAmountSeeds()>Morty.getAmountSeeds()) {
         	System.out.println("Rick has won by collecting "+Rick.getAmountSeeds() +" seeds");
         	winner=nicknameRick;
@@ -238,21 +238,27 @@ public class Main {
        int option = sc.nextInt();
        int destiny=0;
        if(option==1){
-          // if((posPlayer+dice)>num){
-            //   System.out.println("No puedes avanzar");//CAMBIAR
-           //}else{
+          if((posPlayer+dice)>num){
+              destiny=posPlayer+dice;
+              destiny=destiny%num;
+              list.deletepos(posPlayer);
+              list.moveDices(destiny,player);
+           }else{
                destiny=posPlayer+dice;
                list.deletepos(posPlayer);
                list.moveDices(destiny,player);
-           //}
+           }
        }else{
-          // if((posPlayer-dice)<0){
-            //   System.out.println("No puedes retroceder");///CAMBIAR
-           //}else{
+           if((posPlayer-dice)<0){
+               destiny=posPlayer-dice;
+               destiny=num-destiny;
+               list.deletepos(posPlayer);
+               list.moveDices(destiny,player);
+           }else{
                destiny=posPlayer-dice;
                list.deletepos(posPlayer);
                list.moveDicesback(destiny,player);
-          // }
+           }
        }
    }
 }
