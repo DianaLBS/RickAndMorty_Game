@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 
 public class ScoreData{
-	public static  ArrayList<User> scoreBoard;
 
+	public static  ArrayList<User> scoreBoard;
 	public ScoreData() {
 
 		scoreBoard = new ArrayList<>();
@@ -86,7 +86,6 @@ public class ScoreData{
 	public void print() {
 		for (User u: scoreBoard) {
 				System.out.println(u.getUserName());
-		}
 	}
 }
 

@@ -189,8 +189,6 @@ public class Main {
         //Se dice el ganador (Gana el de m s semillas recolectadas)
         if(Rick.getAmountSeeds()>Morty.getAmountSeeds()) {
         	winner=nicknameRick;
-		s
-        	
         }else if(Morty.getAmountSeeds()>Rick.getAmountSeeds()) {
         	winner=nicknameMorty;
         }
