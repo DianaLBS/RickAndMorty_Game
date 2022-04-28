@@ -60,7 +60,11 @@ public class LinkedList {
             System.out.printf("%10s",current.data+" ");
             }else {
                 for(int j=current.index+a-1;j>=current.index;j--) {
+<<<<<<< HEAD
                 	Node node=searchNode(current,j);
+=======
+                    Node node = searchNode(current,j);
+>>>>>>> main
                     System.out.printf("%10s",node.data+" ");
                     i++;
                 }
