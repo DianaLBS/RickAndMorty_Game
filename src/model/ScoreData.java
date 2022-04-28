@@ -69,7 +69,7 @@ public class ScoreData{
 	    while (low <= high) {
 	    	int midPos = (low + high) / 2;
 		    String midUser = scoreBoard.get(midPos).getUserName();
-		    int compare = username.compareTo(midUser);
+		    int compare = username.compareToIgnoreCase(midUser);
 
 		    if (compare == 0) {
 		        return midPos;
