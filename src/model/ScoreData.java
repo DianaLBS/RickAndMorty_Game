@@ -112,11 +112,19 @@ public class ScoreData{
 		}
 
 	}
-	//Imprime los primeros 5 jugadores con mayor puntaje
+	// Imprime los primeros 5 jugadores con mayor puntaje
 	public void printTopFivePlayer() {
 		System.out.println("**********Top five players:*********");
-		for (int i=0;i<5;i++) {
-			System.out.println("Player #"+(i+1) +"  "+scoreBoard.get(i).getUserName()+ "   score: "+ scoreBoard.get(i).getScore());
+		if (scoreBoard.size() < 5) {
+			for (int j= 0;j<scoreBoard.size();j++) {
+				System.out.println("Player #" + (j + 1) + "  " + scoreBoard.get(j).getUserName() + "   score: "
+						+ scoreBoard.get(j).getScore());
+			}
+		} else {
+			for (int i = 0; i < 5; i++) {
+				System.out.println("Player #" + (i + 1) + "  " + scoreBoard.get(i).getUserName() + "   score: "
+						+ scoreBoard.get(i).getScore());
+			}
 		}
 	}
 }
