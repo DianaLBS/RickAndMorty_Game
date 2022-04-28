@@ -89,3 +89,34 @@ public class ScoreData{
 		}
 	}
 }
+
+	//Ordena de mayor a menor puntaje a los ganadores (metodo publico)
+	public void insertionSort() {
+		insertionSort(scoreBoard);
+	}
+	//Ordena de mayor a menor puntaje a los ganadores.
+	private void insertionSort(ArrayList<User> scoreBoard) {
+		for (int i = 1; i < scoreBoard.size(); i++) {
+			for (int j = 0; j < i; j++) {
+				if (scoreBoard.get(i).getScore() > scoreBoard.get(j).getScore()) {
+					Long x =scoreBoard.get(i).getScore();
+					User y= scoreBoard.get(i);
+					y.setScore(x);
+					scoreBoard.remove(i).getScore();
+					scoreBoard.add(j,y);
+					break;
+
+				}
+			}
+
+		}
+
+	}
+	//Imprime los primeros 5 jugadores con mayor puntaje
+	public void printTopFivePlayer() {
+		System.out.println("**********Top five players:*********");
+		for (int i=0;i<5;i++) {
+			System.out.println("Player #"+(i+1) +"  "+scoreBoard.get(i).getUserName()+ "   score: "+ scoreBoard.get(i).getScore());
+		}
+	}
+}

@@ -101,6 +101,7 @@ public class Main {
         String nicknameRick = sc.next();
         System.out.println("Enter the Username for Morty:");
         String nicknameMorty = sc.next();
+	  scoredata.insertionSort();
         scoredata.saveJSON();
 
         int posR = scoredata.searchUser(nicknameRick);
@@ -112,7 +113,7 @@ public class Main {
         long prevScoreM=0;
         long prevScoreR=0;
         
-        //si pos es -1 no se enconr� el usuario
+        //si pos es -1 no se enconr  el usuario
         if(posM!=-1) {
         	 prevScoreM=ScoreData.scoreBoard.get(posM).getScore();	 //guarda el puntaje antiguo del jugador
         }
@@ -185,9 +186,10 @@ public class Main {
         		+ "Total seeds collected: "+Morty.getAmountSeeds()+ "\n");
         String winner="";
        
-        //Se dice el ganador (Gana el de m�s semillas recolectadas)
+        //Se dice el ganador (Gana el de m s semillas recolectadas)
         if(Rick.getAmountSeeds()>Morty.getAmountSeeds()) {
         	winner=nicknameRick;
+		s
         	
         }else if(Morty.getAmountSeeds()>Rick.getAmountSeeds()) {
         	winner=nicknameMorty;
@@ -209,7 +211,10 @@ public class Main {
         }else {
         	scoredata.scoreBoard.add(new User(winner,totalScore)); //Guarda en el tablero de puntajes un nuevo usuario en caso de no haber ganado antes
         }
+	  scoredata.insertionSort();
         scoredata.saveJSON();
+	 //Mostrar el top 5 de jugadores.
+	  scoredata.printTopFivePlayer();
     }
     ///SE DEBEN CAMBIAR PLAYERS EN MISMA POS
   public void throwdice(LinkedList list,Player player,int num){
