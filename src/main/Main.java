@@ -228,22 +228,22 @@ public class Main {
           if((posPlayer+dice)>num){
               destiny=posPlayer+dice;
               destiny=destiny%num;
-              list.deletepos(posPlayer);
+              list.deletepos(posPlayer,player);
               list.moveDices(destiny,player);
            }else{
                destiny=posPlayer+dice;
-               list.deletepos(posPlayer);
+               list.deletepos(posPlayer,player);
                list.moveDices(destiny,player);
            }
        }else{
-           if((posPlayer-dice)<0){
+           if((posPlayer-dice)<=0){
                destiny=posPlayer-dice;
                destiny=num-destiny;
-               list.deletepos(posPlayer);
+               list.deletepos(posPlayer,player);
                list.moveDices(destiny,player);
            }else{
                destiny=posPlayer-dice;
-               list.deletepos(posPlayer);
+               list.deletepos(posPlayer,player);
                list.moveDicesback(destiny,player);
            }
        }

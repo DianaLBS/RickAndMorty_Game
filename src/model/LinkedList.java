@@ -174,7 +174,12 @@ public class LinkedList {
                 seeds++;
                 player.setAmountSeeds(seeds);
             }
-            current.data=player.getIdPlayer();
+            if(current.data.equals("R")||current.data.equals("M")) {
+            	current.data="RM";
+            }
+            else{
+            	current.data=player.getIdPlayer();
+            }
         }
         if(current.next.equals(first)){
             return;
@@ -188,7 +193,12 @@ public class LinkedList {
                 seeds++;
                 player.setAmountSeeds(seeds);
             }
-            current.data=player.getIdPlayer();
+            if(current.data.equals("R")||current.data.equals("M")) {
+            	current.data="RM";
+            }
+            else{
+            	current.data=player.getIdPlayer();
+            }
             return;
         }
         if(current.next.equals(first)){
@@ -217,7 +227,12 @@ public class LinkedList {
                 seeds++;
                 player.setAmountSeeds(seeds);
             }
-            current.data=player.getIdPlayer();
+            if(current.data.equals("R")||current.data.equals("M")) {
+            	current.data="RM";
+            }
+            else{
+            	current.data=player.getIdPlayer();
+            }
             return;
         }
         if(current.previous==last){
@@ -230,7 +245,13 @@ public class LinkedList {
     }
     //Borrar las posiciones en donde estaban los jugadores
     public void deleteposr(Node current,int posplayer){
-        
+        if(current.data.equals("RM")&&player.getIdPlayer().equals("R")) {
+    		current.data="M";
+    		return;
+    	}else if(current.data.equals("RM")&&player.getIdPlayer().equals("M")) {
+    		current.data="R";
+    		return;
+    	}
         if(current.index==posplayer){
             String posnew = String.valueOf(current.index);
             current.data=posnew;
