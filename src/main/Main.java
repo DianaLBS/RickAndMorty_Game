@@ -158,6 +158,7 @@ public class Main {
             int option=sc.nextInt();
             switch(option){
                 case 1:
+                	list.display(num,n);
                    throwdice(list,player,num);
                    count++;
                    end=LocalTime.now();
@@ -214,7 +215,6 @@ public class Main {
 	 //Mostrar el top 5 de jugadores.
 	  scoredata.printTopFivePlayer();
     }
-    ///SE DEBEN CAMBIAR PLAYERS EN MISMA POS
   public void throwdice(LinkedList list,Player player,int num){
        int dice=(int)(Math.random()*(7-1))+1;
        System.out.println("Dado: "+dice);
@@ -227,9 +227,11 @@ public class Main {
        if(option==1){
           if((posPlayer+dice)>num){
               destiny=posPlayer+dice;
-              destiny=destiny%num;
+              while(destiny>num) {
+            	  destiny=destiny-num;
+              }
               list.deletepos(posPlayer,player);
-              list.moveDices(destiny,player);
+              list.moveDices(destiny,player);  
            }else{
                destiny=posPlayer+dice;
                list.deletepos(posPlayer,player);
@@ -238,7 +240,10 @@ public class Main {
        }else{
            if((posPlayer-dice)<=0){
                destiny=posPlayer-dice;
-               destiny=num-destiny;
+               while(destiny<0) {   
+            	   destiny=destiny+num;
+               }
+               
                list.deletepos(posPlayer,player);
                list.moveDices(destiny,player);
            }else{

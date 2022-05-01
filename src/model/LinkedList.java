@@ -165,7 +165,7 @@ public class LinkedList {
                 seeds++;
                 player.setAmountSeeds(seeds);
             }
-            deletepos(destiny);
+            deletepos(destiny,player);
            destiny = current.portal.index;
            movPortal(first,destiny,player);
         }else if(current.index==destiny){
@@ -217,7 +217,7 @@ public class LinkedList {
                 seeds++;
                 player.setAmountSeeds(seeds);
             }
-            deletepos(destiny);
+            deletepos(destiny,player);
             destiny = current.portal.index;
             movPortal(first,destiny,player);
             return;
@@ -240,11 +240,11 @@ public class LinkedList {
         }
         movBack(current.previous,destiny,player);
     }
-    public void deletepos(int posplayer){
-        deleteposr(first,posplayer);
+    public void deletepos(int posplayer, Player player){
+        deleteposr(first,posplayer, player);
     }
     //Borrar las posiciones en donde estaban los jugadores
-    public void deleteposr(Node current,int posplayer){
+    public void deleteposr(Node current,int posplayer, Player player){
         if(current.data.equals("RM")&&player.getIdPlayer().equals("R")) {
     		current.data="M";
     		return;
@@ -259,7 +259,7 @@ public class LinkedList {
         if(current.next.equals(first)){
             return;
         }
-        deleteposr(current.next,posplayer);
+        deleteposr(current.next,posplayer,player);
     }
     public int posplayer(String idplayer){
         int pos = searchplayer(first,idplayer);
@@ -268,13 +268,11 @@ public class LinkedList {
     //Buscar la posicion donde esta el jugador
     public int searchplayer(Node current,String idplayer){
         
-        if(current.data.equals(idplayer)){
+        if(current.data.equals(idplayer) || current.data.equals("RM")){
             return current.index;
+        }else {
+        	return searchplayer(current.next,idplayer);
         }
-        if(current.next.equals(first)){
-            return 0;
-        }
-        return searchplayer(current.next,idplayer);
     }
     public void pos(){
         posr(first);
