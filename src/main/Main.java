@@ -113,7 +113,7 @@ public class Main {
         long prevScoreM=0;
         long prevScoreR=0;
         
-        //si pos es -1 no se enconr  el usuario
+        //si pos es -1 no se encontro el usuario
         if(posM!=-1) {
         	 prevScoreM=ScoreData.scoreBoard.get(posM).getScore();	 //guarda el puntaje antiguo del jugador
         }
