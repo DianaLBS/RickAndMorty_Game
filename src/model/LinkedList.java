@@ -295,13 +295,24 @@ public class LinkedList {
         if(i>num){
             return;
         }
-        System.out.printf("%10s",current.portaljoined);
+        if(m%2!=0) {
+        System.out.printf("%10s",current.portaljoined+" ");
+        }else {
+        	for(int j=current.index+n-1;j>=current.index;j--) {
+        		Node node = searchNode(current,j);
+        		System.out.printf("%10s",node.portaljoined+" ");
+        		i++;
+        	}
+        	i=current.index+n-1;
+        	current = searchNode(current,i);
+        }
         
         if(i%n==0){
             System.out.println();
+            m++;
         }
         i++;
-        printPortals(current.next,i,num,n);
+        printPortals(current.next,i,num,n,m);
     }
 }
 
