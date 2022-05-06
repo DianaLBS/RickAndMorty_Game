@@ -168,7 +168,7 @@ public class Main {
                     list.display(num,n);
                     break;
                 case 3:
-                    list.displayPortals(num,n);
+                    list.displayPortals(num,n,m);
                     break;
                 case 4:
                     System.out.println(Rick.getName()+" : "+Rick.getAmountSeeds()+" Semillas");

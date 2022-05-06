@@ -287,11 +287,11 @@ public class LinkedList {
         posr(current.next);
     }
     //Aqui va el metodo de retroceder
-    public void displayPortals(int num,int n){
-        printPortals(first,1,num,n);
+    public void displayPortals(int num,int n,int m){
+        printPortals(first,1,num,n,m);
     }
     //Imprimir enlaces de forma correcta
-    public void printPortals(Node current,int i,int num,int n){
+    public void printPortals(Node current,int i,int num,int n,int m){
         if(i>num){
             return;
         }
